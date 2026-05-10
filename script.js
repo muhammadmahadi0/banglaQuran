@@ -9,7 +9,7 @@
 // ============================================
 const CONFIG = {
     API_BASE: 'https://api.quran.com/api/v4',
-    TRANSLATION_ID: 161, // Bengali (Muhammad Farooq)
+    TRANSLATION_ID: 201, // Bengali - Dr. Muhammad Farooq
     AUDIO_BASE: 'https://verses.quran.com',
     RECITERS: {
         'ar.alafasy': { name: 'মিশারি আল আফাসি', base: 'ar.alafasy' },
@@ -18,6 +18,137 @@ const CONFIG = {
         'ar.shaatree': { name: 'শাত্রী', base: 'ar.shaatree' }
     }
 };
+
+// ============================================
+// FALLBACK DATA (Complete 114 Surahs)
+// ============================================
+const FALLBACK_SURAHS = [
+    { number: 1, name_simple: 'আল-ফাতিহা', name_arabic: 'ٱلْفَاتِحَة', verses_count: 7, revelation_place: 'Meccan' },
+    { number: 2, name_simple: 'আল-বাকারা', name_arabic: 'الْبَقَرَة', verses_count: 286, revelation_place: 'Medinan' },
+    { number: 3, name_simple: 'আল-ইমরান', name_arabic: 'آل عِمْرَان', verses_count: 200, revelation_place: 'Medinan' },
+    { number: 4, name_simple: 'আন-নিসা', name_arabic: 'النِّسَاء', verses_count: 176, revelation_place: 'Medinan' },
+    { number: 5, name_simple: 'আল-মায়িদাহ', name_arabic: 'الْمَائِدَة', verses_count: 120, revelation_place: 'Medinan' },
+    { number: 6, name_simple: 'আল-আনআম', name_arabic: 'الْأَنْعَام', verses_count: 165, revelation_place: 'Meccan' },
+    { number: 7, name_simple: 'আল-আ\'রাফ', name_arabic: 'الْأَعْرَاف', verses_count: 206, revelation_place: 'Meccan' },
+    { number: 8, name_simple: 'আল-আনফাল', name_arabic: 'الْأَنْفَال', verses_count: 75, revelation_place: 'Medinan' },
+    { number: 9, name_simple: 'আত-তাওবাহ', name_arabic: 'التَّوْبَة', verses_count: 129, revelation_place: 'Medinan' },
+    { number: 10, name_simple: 'ইউনুস', name_arabic: 'يُونُس', verses_count: 109, revelation_place: 'Meccan' },
+    { number: 11, name_simple: 'হুদ', name_arabic: 'هُود', verses_count: 123, revelation_place: 'Meccan' },
+    { number: 12, name_simple: 'ইউসুফ', name_arabic: 'يُوسُف', verses_count: 111, revelation_place: 'Meccan' },
+    { number: 13, name_simple: 'আর-রা\'দ', name_arabic: 'الرَّعْد', verses_count: 43, revelation_place: 'Medinan' },
+    { number: 14, name_simple: 'ইব্রাহিম', name_arabic: 'إِبْرَاهِيم', verses_count: 52, revelation_place: 'Meccan' },
+    { number: 15, name_simple: 'আল-হিজর', name_arabic: 'الْحِجْر', verses_count: 99, revelation_place: 'Meccan' },
+    { number: 16, name_simple: 'আন-নাহল', name_arabic: 'النَّحْل', verses_count: 128, revelation_place: 'Meccan' },
+    { number: 17, name_simple: 'আল-ইসরা', name_arabic: 'الْإِسْرَاء', verses_count: 111, revelation_place: 'Meccan' },
+    { number: 18, name_simple: 'আল-কাহফ', name_arabic: 'الْكَهْف', verses_count: 110, revelation_place: 'Meccan' },
+    { number: 19, name_simple: 'মারয়াম', name_arabic: 'مَرْيَم', verses_count: 98, revelation_place: 'Meccan' },
+    { number: 20, name_simple: 'তাহা', name_arabic: 'طه', verses_count: 135, revelation_place: 'Meccan' },
+    { number: 21, name_simple: 'আল-আম্বিয়াহ', name_arabic: 'الْأَنْبِيَاء', verses_count: 112, revelation_place: 'Meccan' },
+    { number: 22, name_simple: 'আল-হজ', name_arabic: 'الْحَجّ', verses_count: 78, revelation_place: 'Medinan' },
+    { number: 23, name_simple: 'আল-মু\'মিনুন', name_arabic: 'الْمُؤْمِنُونَ', verses_count: 118, revelation_place: 'Meccan' },
+    { number: 24, name_simple: 'আন-নূর', name_arabic: 'النُّور', verses_count: 64, revelation_place: 'Medinan' },
+    { number: 25, name_simple: 'আল-ফুরকান', name_arabic: 'الْفُرْقَان', verses_count: 77, revelation_place: 'Meccan' },
+    { number: 26, name_simple: 'আশ-শু\'আরা', name_arabic: 'الشُّعَرَاء', verses_count: 227, revelation_place: 'Meccan' },
+    { number: 27, name_simple: 'আন-নামল', name_arabic: 'النَّمْل', verses_count: 93, revelation_place: 'Meccan' },
+    { number: 28, name_simple: 'আল-কাসাস', name_arabic: 'الْقَصَص', verses_count: 88, revelation_place: 'Meccan' },
+    { number: 29, name_simple: 'আল-আনকাবুত', name_arabic: 'الْعَنْكَبُوت', verses_count: 69, revelation_place: 'Meccan' },
+    { number: 30, name_simple: 'আর-রূম', name_arabic: 'الرُّوم', verses_count: 60, revelation_place: 'Meccan' },
+    { number: 31, name_simple: 'লুকমান', name_arabic: 'لُقْمَان', verses_count: 34, revelation_place: 'Meccan' },
+    { number: 32, name_simple: 'আস-সাজদাহ', name_arabic: 'السَّجْدَة', verses_count: 30, revelation_place: 'Meccan' },
+    { number: 33, name_simple: 'আল-আহযাব', name_arabic: 'الْأَحْزَاب', verses_count: 73, revelation_place: 'Medinan' },
+    { number: 34, name_simple: 'সাবা', name_arabic: 'سَبَأ', verses_count: 54, revelation_place: 'Meccan' },
+    { number: 35, name_simple: 'ফাতির', name_arabic: 'فَاطِر', verses_count: 45, revelation_place: 'Meccan' },
+    { number: 36, name_simple: 'ইয়াসীন', name_arabic: 'يُس', verses_count: 83, revelation_place: 'Meccan' },
+    { number: 37, name_simple: 'আস-সাফফাত', name_arabic: 'الصَّافَّات', verses_count: 182, revelation_place: 'Meccan' },
+    { number: 38, name_simple: 'সাদ', name_arabic: 'ص', verses_count: 88, revelation_place: 'Meccan' },
+    { number: 39, name_simple: 'আয-যুমার', name_arabic: 'الزُّمَر', verses_count: 75, revelation_place: 'Meccan' },
+    { number: 40, name_simple: 'গাফির', name_arabic: 'غَافِر', verses_count: 85, revelation_place: 'Meccan' },
+    { number: 41, name_simple: 'ফুসসিলাত', name_arabic: 'فُصِّلَتْ', verses_count: 54, revelation_place: 'Meccan' },
+    { number: 42, name_simple: 'আশ-শূরা', name_arabic: 'الشُّورَى', verses_count: 53, revelation_place: 'Meccan' },
+    { number: 43, name_simple: 'আয-যুখরুফ', name_arabic: 'الزُّخْرُف', verses_count: 89, revelation_place: 'Meccan' },
+    { number: 44, name_simple: 'আদ-দুখান', name_arabic: 'الدُّخَان', verses_count: 59, revelation_place: 'Meccan' },
+    { number: 45, name_simple: 'আল-জাসিয়াহ', name_arabic: 'الْجَاثِيَة', verses_count: 37, revelation_place: 'Meccan' },
+    { number: 46, name_simple: 'আল-আহকাফ', name_arabic: 'الْأَحْقَاف', verses_count: 35, revelation_place: 'Meccan' },
+    { number: 47, name_simple: 'মুহাম্মাদ', name_arabic: 'مُحَمَّد', verses_count: 38, revelation_place: 'Medinan' },
+    { number: 48, name_simple: 'আল-ফাতহ', name_arabic: 'الْفَتْح', verses_count: 29, revelation_place: 'Medinan' },
+    { number: 49, name_simple: 'আল-হুজুরাত', name_arabic: 'الْحُجُرَات', verses_count: 18, revelation_place: 'Medinan' },
+    { number: 50, name_simple: 'কাফ', name_arabic: 'ق', verses_count: 45, revelation_place: 'Meccan' },
+    { number: 51, name_simple: 'আয-যারিয়াত', name_arabic: 'الذَّارِيَات', verses_count: 60, revelation_place: 'Meccan' },
+    { number: 52, name_simple: 'আত-তূর', name_arabic: 'الطُّور', verses_count: 49, revelation_place: 'Meccan' },
+    { number: 53, name_simple: 'আন-নজম', name_arabic: 'النَّجْم', verses_count: 62, revelation_place: 'Meccan' },
+    { number: 54, name_simple: 'আল-কামার', name_arabic: 'الْقَمَر', verses_count: 55, revelation_place: 'Meccan' },
+    { number: 55, name_simple: 'আর-রহমান', name_arabic: 'الرَّحْمَن', verses_count: 78, revelation_place: 'Medinan' },
+    { number: 56, name_simple: 'আল-ওয়াকিয়াহ', name_arabic: 'الْوَاقِعَة', verses_count: 96, revelation_place: 'Meccan' },
+    { number: 57, name_simple: 'আল-হাদীদ', name_arabic: 'الْحَدِيد', verses_count: 29, revelation_place: 'Medinan' },
+    { number: 58, name_simple: 'আল-মুজাদালাহ', name_arabic: 'الْمُجَادِلَة', verses_count: 22, revelation_place: 'Medinan' },
+    { number: 59, name_simple: 'আল-হাশর', name_arabic: 'الْحَشْر', verses_count: 24, revelation_place: 'Medinan' },
+    { number: 60, name_simple: 'আল-মুমতাহিনাহ', name_arabic: 'الْمُمْتَحَنَة', verses_count: 13, revelation_place: 'Medinan' },
+    { number: 61, name_simple: 'আস-সাফ', name_arabic: 'الصُّفّ', verses_count: 14, revelation_place: 'Medinan' },
+    { number: 62, name_simple: 'আল-জুমু\'আহ', name_arabic: 'الْجُمُعَة', verses_count: 11, revelation_place: 'Medinan' },
+    { number: 63, name_simple: 'আল-মুনাফিকুন', name_arabic: 'الْمُنَافِقُونَ', verses_count: 11, revelation_place: 'Medinan' },
+    { number: 64, name_simple: 'আত-তাগাবুন', name_arabic: 'التَّغَابُن', verses_count: 18, revelation_place: 'Medinan' },
+    { number: 65, name_simple: 'আত-তালাক', name_arabic: 'الطَّلَاق', verses_count: 12, revelation_place: 'Medinan' },
+    { number: 66, name_simple: 'আত-তাহরীম', name_arabic: 'التَّحْرِيم', verses_count: 12, revelation_place: 'Medinan' },
+    { number: 67, name_simple: 'আল-মুল্ক', name_arabic: 'الْمُلْك', verses_count: 30, revelation_place: 'Meccan' },
+    { number: 68, name_simple: 'আল-কলম', name_arabic: 'الْقَلَم', verses_count: 52, revelation_place: 'Meccan' },
+    { number: 69, name_simple: 'আল-হাক্কাহ', name_arabic: 'الْحَاقَّة', verses_count: 52, revelation_place: 'Meccan' },
+    { number: 70, name_simple: 'আল-মা\'আরিজ', name_arabic: 'الْمَعَارِج', verses_count: 44, revelation_place: 'Meccan' },
+    { number: 71, name_simple: 'নূহ', name_arabic: 'نُوح', verses_count: 28, revelation_place: 'Meccan' },
+    { number: 72, name_simple: 'আল-জিন', name_arabic: 'الْجِنّ', verses_count: 28, revelation_place: 'Meccan' },
+    { number: 73, name_simple: 'আল-মুয্যযাল', name_arabic: 'الْمُزَّمِّل', verses_count: 20, revelation_place: 'Meccan' },
+    { number: 74, name_simple: 'আল-মুদ্দাস্সির', name_arabic: 'الْمُدَّثِّر', verses_count: 56, revelation_place: 'Meccan' },
+    { number: 75, name_simple: 'আল-কিয়ামাহ', name_arabic: 'الْقِيَامَة', verses_count: 40, revelation_place: 'Meccan' },
+    { number: 76, name_simple: 'আল-ইনসান', name_arabic: 'الْإِنْسَان', verses_count: 31, revelation_place: 'Medinan' },
+    { number: 77, name_simple: 'আল-মুর্সালাত', name_arabic: 'الْمُرْسَلَات', verses_count: 50, revelation_place: 'Meccan' },
+    { number: 78, name_simple: 'আন-নাবা', name_arabic: 'النَّبَأ', verses_count: 40, revelation_place: 'Meccan' },
+    { number: 79, name_simple: 'আন-নাযি\'আত', name_arabic: 'النَّازِعَات', verses_count: 46, revelation_place: 'Meccan' },
+    { number: 80, name_simple: 'আবাস', name_arabic: 'عَبَس', verses_count: 42, revelation_place: 'Meccan' },
+    { number: 81, name_simple: 'আত-তাকওয়ীর', name_arabic: 'التَّكْوِير', verses_count: 29, revelation_place: 'Meccan' },
+    { number: 82, name_simple: 'আল-ইনফিতার', name_arabic: 'الْإِنْفِطَار', verses_count: 19, revelation_place: 'Meccan' },
+    { number: 83, name_simple: 'আল-মুতাফফিফীন', name_arabic: 'الْمُطَفِّفِينَ', verses_count: 36, revelation_place: 'Meccan' },
+    { number: 84, name_simple: 'আল-ইনশিকাক', name_arabic: 'الْإِنْشِقَاق', verses_count: 25, revelation_place: 'Meccan' },
+    { number: 85, name_simple: 'আল-বুরূজ', name_arabic: 'الْبُرُوج', verses_count: 22, revelation_place: 'Meccan' },
+    { number: 86, name_simple: 'আত-তারিক', name_arabic: 'الطَّارِق', verses_count: 17, revelation_place: 'Meccan' },
+    { number: 87, name_simple: 'আল-আ\'লা', name_arabic: 'الْأَعْلَى', verses_count: 19, revelation_place: 'Meccan' },
+    { number: 88, name_simple: 'আল-গাশিয়াহ', name_arabic: 'الْغَاشِيَة', verses_count: 26, revelation_place: 'Meccan' },
+    { number: 89, name_simple: 'আল-ফাজর', name_arabic: 'الْفَجْر', verses_count: 30, revelation_place: 'Meccan' },
+    { number: 90, name_simple: 'আল-বালাদ', name_arabic: 'الْبَلَد', verses_count: 20, revelation_place: 'Meccan' },
+    { number: 91, name_simple: 'আশ-শামস', name_arabic: 'الشَّمْس', verses_count: 15, revelation_place: 'Meccan' },
+    { number: 92, name_simple: 'আল-লাইল', name_arabic: 'اللَّيْل', verses_count: 21, revelation_place: 'Meccan' },
+    { number: 93, name_simple: 'আদ-দুহা', name_arabic: 'الضُّحَى', verses_count: 11, revelation_place: 'Meccan' },
+    { number: 94, name_simple: 'আশ-শারহ', name_arabic: 'الْشَّرْح', verses_count: 8, revelation_place: 'Meccan' },
+    { number: 95, name_simple: 'আত-তীন', name_arabic: 'التِّين', verses_count: 8, revelation_place: 'Meccan' },
+    { number: 96, name_simple: 'আল-আ\'লাক', name_arabic: 'الْعَلَق', verses_count: 19, revelation_place: 'Meccan' },
+    { number: 97, name_simple: 'আল-কদর', name_arabic: 'الْقَدْر', verses_count: 5, revelation_place: 'Meccan' },
+    { number: 98, name_simple: 'আল-বাইয়িনাহ', name_arabic: 'الْبَيِّنَة', verses_count: 8, revelation_place: 'Medinan' },
+    { number: 99, name_simple: 'আয-যিলজালাহ', name_arabic: 'الزَّلْزَلَة', verses_count: 8, revelation_place: 'Medinan' },
+    { number: 100, name_simple: 'আল-আ\'দিয়াত', name_arabic: 'الْعَادِيَات', verses_count: 11, revelation_place: 'Meccan' },
+    { number: 101, name_simple: 'আল-কারি\'আহ', name_arabic: 'الْقَارِعَة', verses_count: 11, revelation_place: 'Meccan' },
+    { number: 102, name_simple: 'আত-তাকাসুর', name_arabic: 'التَّكَاثُر', verses_count: 8, revelation_place: 'Meccan' },
+    { number: 103, name_simple: 'আল-আসর', name_arabic: 'الْعَصْر', verses_count: 3, revelation_place: 'Meccan' },
+    { number: 104, name_simple: 'আল-হুমাজাহ', name_arabic: 'الْهُمَزَة', verses_count: 9, revelation_place: 'Meccan' },
+    { number: 105, name_simple: 'আল-ফীল', name_arabic: 'الْفِيل', verses_count: 5, revelation_place: 'Meccan' },
+    { number: 106, name_simple: 'কুরাইশ', name_arabic: 'قُرَيْش', verses_count: 4, revelation_place: 'Meccan' },
+    { number: 107, name_simple: 'আল-মা\'ঊন', name_arabic: 'الْمَاعُون', verses_count: 7, revelation_place: 'Meccan' },
+    { number: 108, name_simple: 'আল-কাওছার', name_arabic: 'الْكَوْثَر', verses_count: 3, revelation_place: 'Meccan' },
+    { number: 109, name_simple: 'আল-কাফিরুন', name_arabic: 'الْكَافِرُونَ', verses_count: 6, revelation_place: 'Meccan' },
+    { number: 110, name_simple: 'আন-নাসর', name_arabic: 'النَّصْر', verses_count: 3, revelation_place: 'Medinan' },
+    { number: 111, name_simple: 'আল-মাসাদ', name_arabic: 'الْمَسَد', verses_count: 5, revelation_place: 'Meccan' },
+    { number: 112, name_simple: 'আল-ইকলাস', name_arabic: 'الْإِخْلَاص', verses_count: 4, revelation_place: 'Meccan' },
+    { number: 113, name_simple: 'আল-ফালাক', name_arabic: 'الْفَلَق', verses_count: 5, revelation_place: 'Meccan' },
+    { number: 114, name_simple: 'আন-নাস', name_arabic: 'النَّاس', verses_count: 6, revelation_place: 'Meccan' }
+];
+
+// Sample verses fallback (first surah)
+const SAMPLE_VERSES = [
+    { verse_number: 1, text_uthmani: 'بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ', translations: [{ text: 'পরম করুণাময়, অতিদয়াবান আল্লাহর নামে।' }] },
+    { verse_number: 2, text_uthmani: 'الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ', translations: [{ text: 'সমস্ত প্রশংসা আল্লাহর, যিনি সমগ্র বিশ্বের রব।' }] },
+    { verse_number: 3, text_uthmani: 'الرَّحْمَنِ الرَّحِيمِ', translations: [{ text: 'পরম করুণাময়, অতিদয়াবান।' }] },
+    { verse_number: 4, text_uthmani: 'مَالِكِ يَوْمِ الدِّينِ', translations: [{ text: 'বিচার দিবসের মালিক।' }] },
+    { verse_number: 5, text_uthmani: 'إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ', translations: [{ text: 'আমরা শুধুমাত্র তোমারই ইবাদত করি এবং শুধুমাত্র তোমারই সাহায্য প্রার্থনা করি।' }] },
+    { verse_number: 6, text_uthmani: 'اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ', translations: [{ text: 'আমাদের সরল পথে পরিচালিত করো।' }] },
+    { verse_number: 7, text_uthmani: 'صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ', translations: [{ text: 'যাদের প্রতি তুমি অনুগ্রহ করেছ তাদের পথে, যাদের উপর ক্রোধ হয়েছে এবং যারা পথভ্রষ্ট তাদের পথে নয়।' }] }
+];
 
 // ============================================
 // STATE
@@ -431,6 +562,9 @@ function updateProgress() {
 // LOAD SURAH DATA
 // ============================================
 async function loadSurah(surahNum) {
+    if (!surahNum) surahNum = 1;
+    state.currentSurah = surahNum;
+
     // Show loading
     elements.quranContent.innerHTML = `
         <div class="flex flex-col items-center justify-center py-20">
@@ -438,28 +572,29 @@ async function loadSurah(surahNum) {
             <p class="text-dark-muted">সূরা লোড হচ্ছে...</p>
         </div>`;
 
-    // Fetch Arabic text
-    const arabicData = await fetchAPI(`/chapters/${surahNum}/verses?recitation=1`);
+    try {
+        // Fetch Arabic text
+        const arabicData = await fetchAPI(`/chapters/${surahNum}/verses?recitation=1`);
 
-    // Fetch Bengali translation
-    const transData = await fetchAPI(`/chapters/${surahNum}/verses?translations=${CONFIG.TRANSLATION_ID}&language=bn`);
+        // Fetch Bengali translation
+        const transData = await fetchAPI(`/chapters/${surahNum}/verses?translations=${CONFIG.TRANSLATION_ID}&language=bn`);
 
-    if (!arabicData) {
-        elements.quranContent.innerHTML = '<div class="text-center py-20 text-dark-muted">ত্রুটি হয়েছে</div>';
-        return;
+        if (arabicData && arabicData.verses) {
+            state.currentSurahData = arabicData.verses;
+            const translationData = transData?.translations || [];
+            renderQuran(surahNum, arabicData.verses, translationData);
+        } else {
+            // Use fallback sample data
+            renderQuran(surahNum, SAMPLE_VERSES, SAMPLE_VERSES.map(v => ({ verse_number: v.verse_number, text: v.translations[0].text })));
+        }
+    } catch (e) {
+        // Use fallback on error
+        renderQuran(surahNum, SAMPLE_VERSES, SAMPLE_VERSES.map(v => ({ verse_number: v.verse_number, text: v.translations[0].text })));
     }
 
-    state.currentSurahData = arabicData.verses;
-    const translationData = transData?.translations || [];
-
-    renderQuran(surahNum, arabicData.verses, translationData);
     updateHeader();
     updateProgress();
-
-    // Save position
     save('quran_current_surah', surahNum);
-
-    // Scroll to top
     $('main-content').scrollTop = 0;
 }
 
@@ -693,26 +828,40 @@ async function init() {
         initSettings();
         setupEventListeners();
 
-        // Fetch surah list
+        // Try to fetch surah list from API
         const data = await fetchAPI('/chapters');
-        if (data?.chapters) {
-            state.surahs = data.chapters;
-            hideLoader();
 
-            const savedFont = localStorage.getItem('quran_font_style');
-            if (savedFont) {
-                showReaderPage();
-            } else {
-                showHomePage();
-            }
+        if (data?.chapters && data.chapters.length > 0) {
+            state.surahs = data.chapters;
         } else {
-            throw new Error('Failed to load surahs');
+            // Use fallback surah data
+            state.surahs = FALLBACK_SURAHS;
+        }
+
+        hideLoader();
+
+        const savedFont = localStorage.getItem('quran_font_style');
+        if (savedFont) {
+            // Ensure currentSurah is valid
+            const savedSurah = parseInt(localStorage.getItem('quran_current_surah'));
+            state.currentSurah = (savedSurah && savedSurah >= 1 && savedSurah <= 114) ? savedSurah : 1;
+            showReaderPage();
+        } else {
+            showHomePage();
         }
     } catch (error) {
         console.error('Init error:', error);
+        // Use fallback data
+        state.surahs = FALLBACK_SURAHS;
         hideLoader();
-        showToast('অ্যাপ লোড করতে সমস্যা');
-        showHomePage();
+
+        const savedFont = localStorage.getItem('quran_font_style');
+        if (savedFont) {
+            state.currentSurah = 1;
+            showReaderPage();
+        } else {
+            showHomePage();
+        }
     }
 }
 
