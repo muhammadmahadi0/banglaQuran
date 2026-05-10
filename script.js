@@ -96,11 +96,13 @@ const elements = {
 // UTILITY FUNCTIONS
 // ============================================
 function toBengali(num) {
+    if (num === undefined || num === null) return '০';
     const bn = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
     return num.toString().split('').map(d => bn[parseInt(d)] || d).join('');
 }
 
 function toArabic(num) {
+    if (num === undefined || num === null) return '٠';
     const ar = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
     return num.toString().split('').map(d => ar[parseInt(d)] || d).join('');
 }
