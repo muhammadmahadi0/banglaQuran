@@ -1,6 +1,5 @@
 /**
- * Quran Bangla - Complete Application
- * Uses embedded fallback data (no API calls)
+ * Quran Bangla - Application with alquran.cloud API
  */
 
 // ============================================
@@ -18,7 +17,7 @@ const SURAHS = [
     { number: 9, name_simple: 'আত-তাওবাহ', name_arabic: 'التَّوْبَة', verses_count: 129, revelation_place: 'Medinan' },
     { number: 10, name_simple: 'ইউনুস', name_arabic: 'يُونُس', verses_count: 109, revelation_place: 'Meccan' },
     { number: 11, name_simple: 'হুদ', name_arabic: 'هُود', verses_count: 123, revelation_place: 'Meccan' },
-    { number: 12, name_simple: 'ইউসুফ', name_arabic: 'يُوسُف', verses_count: 111, revelation_place: 'Meccan' },
+    { number: 12, name_simple: 'ইউসুফ', name_arabic: 'يُوسُف', verses_count: 111, verse_place: 'Meccan' },
     { number: 13, name_simple: 'আর-রাদ', name_arabic: 'الرَّعْد', verses_count: 43, revelation_place: 'Medinan' },
     { number: 14, name_simple: 'ইব্রাহিম', name_arabic: 'إِبْرَاهِيم', verses_count: 52, revelation_place: 'Meccan' },
     { number: 15, name_simple: 'আল-হিজর', name_arabic: 'الْحِجْر', verses_count: 99, revelation_place: 'Meccan' },
@@ -99,31 +98,56 @@ const SURAHS = [
     { number: 90, name_simple: 'আল-বালাদ', name_arabic: 'الْبَلَد', verses_count: 20, revelation_place: 'Meccan' },
     { number: 91, name_simple: 'আশ-শামস', name_arabic: 'الشَّمْس', verses_count: 15, revelation_place: 'Meccan' },
     { number: 92, name_simple: 'আল-লাইল', name_arabic: 'اللَّيْل', verses_count: 21, revelation_place: 'Meccan' },
-    { number: 93, name_simple: 'আদ-দুহা', name_arabic: 'الضُّحَى', verses_count: 11, revelation_place: 'Meccan' },
-    { number: 94, name_simple: 'আশ-শারহ', name_arabic: 'الْشَّرْح', verses_count: 8, revelation_place: 'Meccan' },
+    { number: 93, name_simple: 'আয-যহা', name_arabic: 'الضُّحَى', verses_count: 11, revelation_place: 'Meccan' },
+    { number: 94, name_simple: 'আশ-শারহ', name_arabic: 'الشَّرْح', verses_count: 8, revelation_place: 'Meccan' },
     { number: 95, name_simple: 'আত-তীন', name_arabic: 'التِّين', verses_count: 8, revelation_place: 'Meccan' },
     { number: 96, name_simple: 'আল-আলাক', name_arabic: 'الْعَلَق', verses_count: 19, revelation_place: 'Meccan' },
     { number: 97, name_simple: 'আল-কদর', name_arabic: 'الْقَدْر', verses_count: 5, revelation_place: 'Meccan' },
     { number: 98, name_simple: 'আল-বাইয়িনাহ', name_arabic: 'الْبَيِّنَة', verses_count: 8, revelation_place: 'Medinan' },
-    { number: 99, name_simple: 'আয-যিলজালাহ', name_arabic: 'الزَّلْزَلَة', verses_count: 8, revelation_place: 'Medinan' },
+    { number: 99, name_simple: 'আয-যিলজাল', name_arabic: 'الزِّلْزَلَة', verses_count: 8, revelation_place: 'Medinan' },
     { number: 100, name_simple: 'আল-আদিয়াত', name_arabic: 'الْعَادِيَات', verses_count: 11, revelation_place: 'Meccan' },
     { number: 101, name_simple: 'আল-কারিআহ', name_arabic: 'الْقَارِعَة', verses_count: 11, revelation_place: 'Meccan' },
     { number: 102, name_simple: 'আত-তাকাসুর', name_arabic: 'التَّكَاثُر', verses_count: 8, revelation_place: 'Meccan' },
     { number: 103, name_simple: 'আল-আসর', name_arabic: 'الْعَصْر', verses_count: 3, revelation_place: 'Meccan' },
-    { number: 104, name_simple: 'আল-হুমাজাহ', name_arabic: 'الْهُمَزَة', verses_count: 9, revelation_place: 'Meccan' },
+    { number: 104, name_simple: 'আল-হুমাযাহ', name_arabic: 'الْهُمَزَة', verses_count: 9, revelation_place: 'Meccan' },
     { number: 105, name_simple: 'আল-ফীল', name_arabic: 'الْفِيل', verses_count: 5, revelation_place: 'Meccan' },
     { number: 106, name_simple: 'কুরাইশ', name_arabic: 'قُرَيْش', verses_count: 4, revelation_place: 'Meccan' },
-    { number: 107, name_simple: 'আল-মাঊন', name_arabic: 'الْمَاعُون', verses_count: 7, revelation_place: 'Meccan' },
-    { number: 108, name_simple: 'আল-কাওছার', name_arabic: 'الْكَوْثَر', verses_count: 3, revelation_place: 'Meccan' },
+    { number: 107, name_simple: 'আল-মাউন', name_arabic: 'الْمَاعُون', verses_count: 7, revelation_place: 'Meccan' },
+    { number: 108, name_simple: 'আল-কাউছার', name_arabic: 'الْكَوْثَر', verses_count: 3, revelation_place: 'Meccan' },
     { number: 109, name_simple: 'আল-কাফিরুন', name_arabic: 'الْكَافِرُونَ', verses_count: 6, revelation_place: 'Meccan' },
     { number: 110, name_simple: 'আন-নাসর', name_arabic: 'النَّصْر', verses_count: 3, revelation_place: 'Medinan' },
     { number: 111, name_simple: 'আল-মাসাদ', name_arabic: 'الْمَسَد', verses_count: 5, revelation_place: 'Meccan' },
-    { number: 112, name_simple: 'আল-ইকলাস', name_arabic: 'الْإِخْلَاص', verses_count: 4, revelation_place: 'Meccan' },
+    { number: 112, name_simple: 'আল-ইখলাস', name_arabic: 'الْإِخْلَاص', verses_count: 4, revelation_place: 'Meccan' },
     { number: 113, name_simple: 'আল-ফালাক', name_arabic: 'الْفَلَق', verses_count: 5, revelation_place: 'Meccan' },
     { number: 114, name_simple: 'আন-নাস', name_arabic: 'النَّاس', verses_count: 6, revelation_place: 'Meccan' }
 ];
 
-// Surah 1 - Al-Fatiha with full verses
+// ============================================
+// API CONFIG - alquran.cloud
+// ============================================
+const API_BASE = 'https://api.alquran.cloud/v1';
+
+async function fetchVerses(surahNum) {
+    try {
+        const response = await fetch(`${API_BASE}/surah/${surahNum}/ar.alafasy`);
+        if (!response.ok) throw new Error('API failed');
+        const data = await response.json();
+
+        if (data.data && data.data.verses) {
+            return data.data.verses.map(v => ({
+                number: v.number,
+                arabic: v.text
+            }));
+        }
+    } catch (e) {
+        console.error('API Error:', e.message);
+    }
+    return null;
+}
+
+// ============================================
+// FALLBACK VERSE DATA - Surah Fatiha
+// ============================================
 const FATIHA_VERSES = [
     { number: 1, arabic: 'بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ', bangla: 'পরম করুণাময়, অতিদয়াবান আল্লাহর নামে।' },
     { number: 2, arabic: 'الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ', bangla: 'সমস্ত প্রশংসা আল্লাহর, যিনি সমগ্র বিশ্বের রব।' },
@@ -145,7 +169,8 @@ const state = {
     currentSurah: parseInt(localStorage.getItem('quran_current_surah')) || 1,
     bookmarks: JSON.parse(localStorage.getItem('quran_bookmarks') || '[]'),
     arabicFontSize: parseInt(localStorage.getItem('quran_arabic_size')) || 32,
-    banglaFontSize: parseInt(localStorage.getItem('quran_bangla_size')) || 18
+    banglaFontSize: parseInt(localStorage.getItem('quran_bangla_size')) || 18,
+    versesCache: {}
 };
 
 // ============================================
@@ -192,24 +217,23 @@ const elements = {
 // ============================================
 function toBengali(num) {
     if (num === undefined || num === null) return '০';
-    const bn = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
-    return num.toString().split('').map(d => bn[parseInt(d)] || d).join('');
+    const bnDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+    return String(num).split('').map(d => bnDigits[parseInt(d)] || d).join('');
 }
 
 function toArabic(num) {
     if (num === undefined || num === null) return '٠';
-    const ar = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
-    return num.toString().split('').map(d => ar[parseInt(d)] || d).join('');
+    const arDigits = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+    return String(num).split('').map(d => arDigits[parseInt(d)] || d).join('');
 }
 
 function save(key, value) {
-    try { localStorage.setItem(key, value); } catch (e) {}
+    try { localStorage.setItem(key, value); } catch (e) { console.warn('Storage error:', e); }
 }
 
 function escapeHtml(text) {
     if (!text) return '';
-    const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
-    return text.replace(/[&<>"']/g, m => map[m]);
+    return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;').replace(/\n/g, ' ');
 }
 
 function showToast(msg, duration = 2500) {
@@ -219,19 +243,16 @@ function showToast(msg, duration = 2500) {
 }
 
 function hideLoader() {
-    if (elements.loader) elements.loader.classList.add('hidden');
+    elements.loader?.classList.add('hidden');
 }
 
 // ============================================
-// THEME
+// THEME & SETTINGS
 // ============================================
 function initTheme() {
-    if (state.theme === 'light') document.body.classList.add('light-mode');
-    const icon = elements.btnTheme?.querySelector('svg');
-    if (icon) {
-        icon.innerHTML = state.theme === 'light'
-            ? '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>'
-            : '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>';
+    if (state.theme === 'light') {
+        document.body.classList.add('light-mode');
+        elements.btnTheme?.querySelector('svg')?.classList.add('hidden');
     }
 }
 
@@ -239,50 +260,53 @@ function toggleTheme() {
     state.theme = state.theme === 'dark' ? 'light' : 'dark';
     document.body.classList.toggle('light-mode');
     save('quran_theme', state.theme);
-    initTheme();
+
+    const sunIcon = elements.btnTheme?.querySelector('.sun-icon');
+    const moonIcon = elements.btnTheme?.querySelector('.moon-icon');
+    if (sunIcon) sunIcon.classList.toggle('hidden', state.theme === 'light');
+    if (moonIcon) moonIcon.classList.toggle('hidden', state.theme === 'dark');
 }
 
-// ============================================
-// SETTINGS
-// ============================================
 function initSettings() {
-    elements.arabicSize.textContent = toBengali(state.arabicFontSize);
-    elements.banglaSize.textContent = toBengali(state.banglaFontSize);
-    document.documentElement.style.setProperty('--arabic-font-size', `${state.arabicFontSize}px`);
-    document.documentElement.style.setProperty('--bangla-font-size', `${state.banglaFontSize}px`);
-    const toggle = elements.toggleTranslation?.querySelector('div');
-    if (toggle) toggle.classList.toggle('translate-x-6', state.showTranslation);
+    elements.arabicSize.value = state.arabicFontSize;
+    elements.banglaSize.value = state.banglaFontSize;
+    document.documentElement.style.setProperty('--arabic-font-size', state.arabicFontSize + 'px');
+    document.documentElement.style.setProperty('--bangla-font-size', state.banglaFontSize + 'px');
 }
 
 function updateFontSize(type, change) {
     if (type === 'arabic') {
-        state.arabicFontSize = Math.max(18, Math.min(48, state.arabicFontSize + change));
-        document.documentElement.style.setProperty('--arabic-font-size', `${state.arabicFontSize}px`);
-        elements.arabicSize.textContent = toBengali(state.arabicFontSize);
+        state.arabicFontSize = Math.max(16, Math.min(48, state.arabicFontSize + change));
+        document.documentElement.style.setProperty('--arabic-font-size', state.arabicFontSize + 'px');
+        elements.arabicSize.value = state.arabicFontSize;
         save('quran_arabic_size', state.arabicFontSize);
     } else {
         state.banglaFontSize = Math.max(12, Math.min(28, state.banglaFontSize + change));
-        document.documentElement.style.setProperty('--bangla-font-size', `${state.banglaFontSize}px`);
-        elements.banglaSize.textContent = toBengali(state.banglaFontSize);
+        document.documentElement.style.setProperty('--bangla-font-size', state.banglaFontSize + 'px');
+        elements.banglaSize.value = state.banglaFontSize;
         save('quran_bangla_size', state.banglaFontSize);
     }
 }
 
+// ============================================
+// TRANSLATION TOGGLE
+// ============================================
 function toggleTranslation() {
     state.showTranslation = !state.showTranslation;
     save('quran_translation', state.showTranslation);
-    const toggle = elements.toggleTranslation?.querySelector('div');
-    if (toggle) toggle.classList.toggle('translate-x-6', state.showTranslation);
+    elements.toggleTranslation.classList.toggle('text-dark-gold', state.showTranslation);
+    elements.toggleTranslation.classList.toggle('text-dark-muted', !state.showTranslation);
     renderQuran(state.currentSurah);
 }
 
 // ============================================
-// MODALS
+// SIDEBAR
 // ============================================
 function toggleSidebar() {
     elements.sidebar.classList.toggle('-translate-x-full');
-    elements.sidebarOverlay.classList.toggle('hidden');
+    elements.sidebarOverlay?.classList.toggle('hidden');
 }
+
 function openSettings() { elements.settingsModal.classList.remove('hidden'); elements.settingsModal.classList.add('flex'); }
 function closeSettings() { elements.settingsModal.classList.add('hidden'); elements.settingsModal.classList.remove('flex'); }
 function openBookmarks() { renderBookmarks(); elements.bookmarksModal.classList.remove('hidden'); elements.bookmarksModal.classList.add('flex'); }
@@ -303,8 +327,6 @@ function addBookmark(surah, ayah) {
         save('quran_bookmarks', JSON.stringify(state.bookmarks));
         showToast('বুকমার্ক যোগ করা হয়েছে');
         renderQuran(surah);
-    } else {
-        showToast('আগে থেকে বুকমার্ক করা আছে');
     }
 }
 
@@ -313,7 +335,6 @@ function removeBookmark(index, e) {
     state.bookmarks.splice(index, 1);
     save('quran_bookmarks', JSON.stringify(state.bookmarks));
     renderBookmarks();
-    showToast('বুকমার্ক সরানো হয়েছে');
 }
 
 function goToBookmark(surah, ayah) {
@@ -321,28 +342,41 @@ function goToBookmark(surah, ayah) {
     save('quran_current_surah', surah);
     closeBookmarks();
     renderQuran(surah);
+    showToast(`সূরা ${toBengali(surah)} - আয়াত ${toBengali(ayah)}`);
 }
 
 function renderBookmarks() {
     if (state.bookmarks.length === 0) {
-        elements.bookmarksList.innerHTML = '<div class="text-center py-10 text-dark-muted">কোনো বুকমার্ক নেই</div>';
+        elements.bookmarksList.innerHTML = '<div class="text-center text-dark-muted p-6">কোনো বুকমার্ক নেই</div>';
         return;
     }
-    elements.bookmarksList.innerHTML = state.bookmarks.map((b, i) => {
+
+    const sorted = [...state.bookmarks].sort((a, b) => b.time - a.time);
+    elements.bookmarksList.innerHTML = sorted.map((b, i) => {
         const surah = SURAHS.find(s => s.number === b.surah);
-        return `<div class="flex items-center justify-between p-3 bg-dark-card rounded-lg cursor-pointer hover:bg-dark-highlight/20" onclick="goToBookmark(${b.surah}, ${b.ayah})">
-            <div><div class="font-semibold">${surah?.name_simple || 'সূরা ' + b.surah}</div><div class="text-sm text-dark-muted">আয়াত ${toBengali(b.ayah)}</div></div>
-            <button class="p-2 text-dark-muted hover:text-red-500" onclick="removeBookmark(${i}, event)">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
-            </button></div>`;
+        return `<div class="surah-item cursor-pointer" onclick="goToBookmark(${b.surah}, ${b.ayah})">
+            <div class="surah-num">${toBengali(b.surah)}</div>
+            <div class="flex-1">
+                <div class="font-semibold text-dark-text">${surah?.name_simple || ''}</div>
+                <div class="text-sm text-dark-muted">আয়াত ${toBengali(b.ayah)}</div>
+            </div>
+            <button onclick="removeBookmark(${state.bookmarks.indexOf(b)}, event)" class="text-red-500 p-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+            </button>
+        </div>`;
     }).join('');
 }
 
 // ============================================
-// COPY
+// COPY AYAH
 // ============================================
 function copyAyah(arabic, bangla) {
-    navigator.clipboard?.writeText(`${arabic}\n\n${bangla}`).then(() => showToast('আয়াত কপি হয়েছে')).catch(() => showToast('কপি ব্যর্থ'));
+    const text = `${arabic}\n\n${bangla}`;
+    navigator.clipboard.writeText(text).then(() => {
+        showToast('আয়াত কপি করা হয়েছে');
+    }).catch(() => {
+        showToast('কপি ব্যর্থ');
+    });
 }
 
 // ============================================
@@ -351,69 +385,141 @@ function copyAyah(arabic, bangla) {
 function goToSurah(surahNum) {
     state.currentSurah = surahNum;
     save('quran_current_surah', surahNum);
+    toggleSidebar();
     renderQuran(surahNum);
-    if (window.innerWidth < 1024) toggleSidebar();
 }
 
+// ============================================
+// SEARCH
+// ============================================
 function searchSurah(query) {
-    const q = query.toLowerCase().trim();
-    if (!q) { renderSurahList(); return; }
-    const filtered = SURAHS.filter(s => s.name_simple.toLowerCase().includes(q) || s.name_arabic.includes(query) || s.number.toString() === query);
-    elements.surahList.innerHTML = filtered.map(s => `<div class="surah-item ${s.number === state.currentSurah ? 'active' : ''}" onclick="goToSurah(${s.number})">
-        <div class="surah-num">${toBengali(s.number)}</div>
-        <div class="flex-1 min-w-0"><div class="font-semibold truncate">${s.name_simple}</div><div class="text-xs text-dark-muted truncate">${s.name_arabic}</div></div>
-        <div class="text-xs text-dark-muted">${toBengali(s.verses_count)}</div></div>`).join('');
+    if (!query.trim()) {
+        elements.surahList.innerHTML = '';
+        renderSurahList();
+        return;
+    }
+
+    const filtered = SURAHS.filter(s =>
+        s.name_simple.includes(query) ||
+        s.name_arabic.includes(query) ||
+        s.number.toString() === query
+    );
+
+    renderFilteredSurahs(filtered);
 }
 
 function globalSearch(query) {
-    const q = query.trim();
-    if (!q) { elements.searchResults.innerHTML = ''; return; }
-    const surahResults = SURAHS.filter(s => s.name_simple.toLowerCase().includes(q) || s.name_arabic.includes(q)).slice(0, 5);
-    let html = '';
-    if (surahResults.length > 0) {
-        html += '<div class="mb-4"><h4 class="text-sm font-semibold text-dark-muted mb-2">সূরা</h4>';
-        html += surahResults.map(s => `<div class="flex items-center gap-3 p-3 bg-dark-card rounded-lg cursor-pointer hover:bg-dark-highlight/20 mb-2" onclick="goToSurahFromSearch(${s.number})">
-            <div class="w-8 h-8 rounded-full bg-dark-border flex items-center justify-center text-sm">${toBengali(s.number)}</div>
-            <div><div class="font-semibold">${s.name_simple}</div><div class="text-xs text-dark-muted">${toBengali(s.verses_count)} আয়াত</div></div></div>`).join('');
-        html += '</div>';
+    if (!query.trim()) {
+        elements.searchResults.innerHTML = '';
+        return;
     }
-    html += '<div class="text-center py-4 text-dark-muted text-sm">সূরার নাম দিয়ে খুঁজুন</div>';
-    elements.searchResults.innerHTML = html;
+
+    const filtered = SURAHS.filter(s =>
+        s.name_simple.includes(query) || s.number.toString() === query
+    );
+
+    elements.searchResults.innerHTML = filtered.map(s => `
+        <div class="surah-item" onclick="goToSurahFromSearch(${s.number})">
+            <div class="surah-num">${toBengali(s.number)}</div>
+            <div class="flex-1">
+                <div class="font-semibold">${s.name_simple}</div>
+                <div class="text-sm text-dark-muted">${s.revelation_place === 'Meccan' ? 'মাক্কী' : 'মাদানী'} • ${toBengali(s.verses_count)} আয়াত</div>
+            </div>
+        </div>
+    `).join('');
 }
 
 function goToSurahFromSearch(surahNum) {
-    closeSearch();
     state.currentSurah = surahNum;
     save('quran_current_surah', surahNum);
+    closeSearch();
     renderQuran(surahNum);
 }
 
 // ============================================
-// RENDER
+// SURAH LIST
 // ============================================
 function renderSurahList() {
-    elements.surahList.innerHTML = SURAHS.map(s => `<div class="surah-item ${s.number === state.currentSurah ? 'active' : ''}" onclick="goToSurah(${s.number})">
-        <div class="surah-num">${toBengali(s.number)}</div>
-        <div class="flex-1 min-w-0"><div class="font-semibold truncate">${s.name_simple}</div><div class="text-xs text-dark-muted truncate">${s.name_arabic}</div></div>
-        <div class="text-xs text-dark-muted">${toBengali(s.verses_count)}</div></div>`).join('');
+    elements.surahList.innerHTML = SURAHS.map(s => `
+        <div class="surah-item ${s.number === state.currentSurah ? 'active' : ''}" onclick="goToSurah(${s.number})">
+            <div class="surah-num">${toBengali(s.number)}</div>
+            <div class="flex-1">
+                <div class="font-semibold text-dark-text">${s.name_simple}</div>
+                <div class="text-sm text-dark-muted">${s.revelation_place === 'Meccan' ? 'মাক্কী' : 'মাদানী'} • ${toBengali(s.verses_count)} আয়াত</div>
+            </div>
+        </div>
+    `).join('');
 }
 
+function renderFilteredSurahs(list) {
+    elements.surahList.innerHTML = list.map(s => `
+        <div class="surah-item ${s.number === state.currentSurah ? 'active' : ''}" onclick="goToSurah(${s.number})">
+            <div class="surah-num">${toBengali(s.number)}</div>
+            <div class="flex-1">
+                <div class="font-semibold text-dark-text">${s.name_simple}</div>
+                <div class="text-sm text-dark-muted">${s.revelation_place === 'Meccan' ? 'মাক্কী' : 'মাদানী'} • ${toBengali(s.verses_count)} আয়াত</div>
+            </div>
+        </div>
+    `).join('');
+}
+
+// ============================================
+// HEADER UPDATE
+// ============================================
 function updateHeader() {
     const surah = SURAHS.find(s => s.number === state.currentSurah);
-    if (elements.surahTitle) elements.surahTitle.textContent = surah?.name_simple || '';
-    if (elements.ayahInfo) elements.ayahInfo.textContent = `১ / ${toBengali(surah?.verses_count || 0)} আয়াত`;
+    elements.surahTitle.textContent = surah?.name_simple || '';
+    elements.ayahInfo.textContent = `${toBengali(surah?.verses_count || 0)} আয়াত • ${surah?.revelation_place === 'Meccan' ? 'মাক্কী' : 'মাদানী'}`;
 }
 
+// ============================================
+// PROGRESS
+// ============================================
 function updateProgress() {
-    if (elements.juzProgress) elements.juzProgress.style.width = `${(state.currentSurah / 114) * 100}%`;
+    const totalVerses = SURAHS.reduce((sum, s) => sum + s.verses_count, 0);
+    const readVerses = SURAHS.slice(0, state.currentSurah - 1).reduce((sum, s) => sum + s.verses_count, 0);
+    const currentSurah = SURAHS.find(s => s.number === state.currentSurah);
+    const progress = Math.round(((readVerses + (currentSurah?.verses_count || 0)) / totalVerses) * 100);
+    elements.juzProgress.style.width = `${progress}%`;
 }
 
-function renderQuran(surahNum) {
+// ============================================
+// RENDER QURAN - Using API + Fallback
+// ============================================
+async function renderQuran(surahNum) {
     const surah = SURAHS.find(s => s.number === surahNum);
     const arabicClass = state.fontStyle === 'kolkatta' ? 'font-amiri' : 'font-schec';
 
-    // Use Fatiha verses for now, in real app would load from data
-    const verses = surahNum === 1 ? FATIHA_VERSES : FATIHA_VERSES.map(v => ({ number: v.number, arabic: `۝${v.number}`, bangla: v.bangla }));
+    // Show loading state
+    elements.quranContent.innerHTML = '<div class="flex justify-center p-8"><div class="loader"></div></div>';
+
+    let verses = [];
+
+    // Try API first
+    if (!state.versesCache[surahNum]) {
+        const apiVerses = await fetchVerses(surahNum);
+        if (apiVerses) {
+            verses = apiVerses.map(v => ({
+                number: v.number,
+                arabic: v.arabic,
+                bangla: surahNum === 1 ? FATIHA_VERSES[v.number - 1]?.bangla : `আয়াত ${toBengali(v.number)}`
+            }));
+            state.versesCache[surahNum] = verses;
+        }
+    }
+
+    // Fallback to embedded data
+    if (verses.length === 0) {
+        if (surahNum === 1) {
+            verses = FATIHA_VERSES;
+        } else {
+            verses = Array.from({ length: surah?.verses_count || 7 }, (_, i) => ({
+                number: i + 1,
+                arabic: `۝${toArabic(i + 1)}`,
+                bangla: `আয়াত ${toBengali(i + 1)} - তথ্য লোড হচ্ছে...`
+            }));
+        }
+    }
 
     let html = `<div class="surah-header animate-fade-in">
         <div class="surah-name-ar">${surah?.name_arabic}</div>
@@ -487,24 +593,32 @@ function setupEventListeners() {
     elements.toggleTranslation?.addEventListener('click', toggleTranslation);
     window.addEventListener('resize', () => { if (window.innerWidth >= 1024) { elements.sidebar.classList.remove('-translate-x-full'); elements.sidebarOverlay?.classList.add('hidden'); } });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeSettings(); closeBookmarks(); closeSearch(); } });
+
+    elements.arabicSize?.addEventListener('change', e => {
+        state.arabicFontSize = parseInt(e.target.value) || 32;
+        document.documentElement.style.setProperty('--arabic-font-size', state.arabicFontSize + 'px');
+        save('quran_arabic_size', state.arabicFontSize);
+    });
+
+    elements.banglaSize?.addEventListener('change', e => {
+        state.banglaFontSize = parseInt(e.target.value) || 18;
+        document.documentElement.style.setProperty('--bangla-font-size', state.banglaFontSize + 'px');
+        save('quran_bangla_size', state.banglaFontSize);
+    });
 }
 
 // ============================================
 // INIT
 // ============================================
-function init() {
+document.addEventListener('DOMContentLoaded', () => {
     initTheme();
     initSettings();
     setupEventListeners();
     hideLoader();
-    const savedFont = localStorage.getItem('quran_font_style');
-    if (savedFont) {
-        const savedSurah = parseInt(localStorage.getItem('quran_current_surah'));
-        state.currentSurah = (savedSurah && savedSurah >= 1 && savedSurah <= 114) ? savedSurah : 1;
-        showReaderPage();
-    } else {
-        showHomePage();
-    }
-}
 
-document.addEventListener('DOMContentLoaded', init);
+    // Initialize translation toggle state
+    if (elements.toggleTranslation) {
+        elements.toggleTranslation.classList.toggle('text-dark-gold', state.showTranslation);
+        elements.toggleTranslation.classList.toggle('text-dark-muted', !state.showTranslation);
+    }
+});
