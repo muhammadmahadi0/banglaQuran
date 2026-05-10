@@ -531,7 +531,7 @@ function updateProgress() {
  */
 function renderQuran() {
     // Find current surah in data
-    const surah = QURAN_DATA.surahahs.find(s => s.number === state.currentSurah);
+    const surah = QURAN_DATA.surahs.find(s => s.number === state.currentSurah);
 
     if (!surah) {
         elements.quranContent.innerHTML = `
