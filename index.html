@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="কুরআন বাংলা - তাইসিরুল কুরআন অনুবাদ সহ পূর্ণাঙ্গ কুরআন পাঠ">
+    <meta name="description" content="কুরআন বাংলা - Quran.com এর মতো আধুনিক কুরআন অ্যাপ">
     <meta name="theme-color" content="#0d1117">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -12,7 +12,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Scheherazade+New:wght@400;500;700&family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Scheherazade+New:wght@400;500;700&family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -45,369 +45,131 @@
                         }
                     },
                     fontFamily: {
-                        arabic: ['Amiri', 'serif'],
-                        arabicHafizi: ['Scheherazade New', 'serif'],
-                        bangla: ['Hind Siliguri', 'Noto Sans Bengali', 'sans-serif']
-                    },
-                    animation: {
-                        'fade-in': 'fadeIn 0.4s ease-out',
-                        'slide-up': 'slideUp 0.3s ease-out',
-                        'pulse-slow': 'pulse 3s ease-in-out infinite'
-                    },
-                    keyframes: {
-                        fadeIn: { '0%': { opacity: '0', transform: 'translateY(10px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
-                        slideUp: { '0%': { transform: 'translateY(20px)', opacity: '0' }, '100%': { transform: 'translateY(0)', opacity: '1' } }
+                        amiri: ['Amiri', 'serif'],
+                        schech: ['Scheherazade New', 'serif'],
+                        bangla: ['Hind Siliguri', 'Noto Sans Bengali', 'sans-serif'],
+                        poppins: ['Poppins', 'sans-serif']
                     }
                 }
             }
         }
     </script>
 
-    <style>
-        /* Custom Styles */
-        :root {
-            --bg-primary: #0d1117;
-            --bg-secondary: #161b22;
-            --bg-card: #21262d;
-            --border: #30363d;
-            --accent: #238636;
-            --gold: #d4a857;
-            --text-primary: #e6edf3;
-            --text-muted: #8b949e;
-            --arabic-kolkatta: 'Amiri', serif;
-            --arabic-hafizi: 'Scheherazade New', serif;
-            --bangla-font: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
-            --font-size-ar: 32px;
-        }
-
-        .light-mode {
-            --bg-primary: #fafbfc;
-            --bg-secondary: #ffffff;
-            --bg-card: #f3f4f6;
-            --border: #d0d7de;
-            --accent: #0969da;
-            --gold: #9a6700;
-            --text-primary: #24292f;
-            --text-muted: #57606a;
-        }
-
-        * { -webkit-tap-highlight-color: transparent; }
-        html { scroll-behavior: smooth; }
-        body { font-family: var(--bangla-font); background: var(--bg-primary); color: var(--text-primary); transition: all 0.3s ease; }
-
-        /* Arabic Text Styles */
-        .arabic-text {
-            font-size: var(--font-size-ar);
-            line-height: 2.4;
-            text-align: center;
-            color: var(--text-primary);
-            direction: rtl;
-            unicode-bidi: plaintext;
-            word-spacing: 2px;
-        }
-        .arabic-kolkatta { font-family: var(--arabic-kolkatta); font-weight: 400; }
-        .arabic-hafizi { font-family: var(--arabic-hafizi); font-weight: 500; line-height: 2.2; }
-
-        /* Bangla Translation */
-        .bangla-trans {
-            font-family: var(--bangla-font);
-            font-size: 1.1rem;
-            line-height: 1.9;
-            color: var(--text-muted);
-            text-align: right;
-            margin-top: 1.25rem;
-            padding-top: 1rem;
-            border-top: 1px dashed var(--border);
-        }
-        .translation-hidden .bangla-trans { display: none; }
-
-        /* Ayah Card */
-        .ayah-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 1rem;
-            padding: 1.5rem;
-            margin-bottom: 1.25rem;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        .ayah-card:hover {
-            border-color: var(--accent);
-            box-shadow: 0 4px 20px rgba(35, 134, 54, 0.1);
-        }
-
-        /* Verse Number */
-        .verse-num {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.375rem 0.875rem;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: 9999px;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin-bottom: 0.75rem;
-        }
-        .verse-num .ar-num { font-family: var(--arabic-kolkatta); }
-        .verse-num .bn-num { font-weight: 600; }
-
-        /* Bismillah */
-        .bismillah {
-            font-family: var(--arabic-kolkatta);
-            font-size: 2rem;
-            text-align: center;
-            color: var(--gold);
-            padding: 2rem 1rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-        }
-        .bismillah::before, .bismillah::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            width: 60px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--border), transparent);
-        }
-        .bismillah::before { right: calc(50% + 100px); }
-        .bismillah::after { left: calc(50% + 100px); }
-
-        /* Surah Header */
-        .surah-header {
-            text-align: center;
-            padding: 2rem 1rem;
-            margin-bottom: 1.5rem;
-            border-bottom: 2px solid var(--border);
-            position: relative;
-        }
-        .surah-header::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50px;
-            height: 2px;
-            background: var(--gold);
-        }
-        .surah-name-ar { font-family: var(--arabic-kolkatta); font-size: 2.5rem; color: var(--gold); margin-bottom: 0.5rem; }
-        .surah-name-bn { font-family: var(--bangla-font); font-size: 1.75rem; font-weight: 700; }
-        .surah-meta { font-size: 0.9rem; color: var(--text-muted); margin-top: 0.5rem; }
-
-        /* Ayah Actions */
-        .ayah-actions {
-            position: absolute;
-            top: 0.75rem;
-            left: 0.75rem;
-            display: flex;
-            gap: 0.375rem;
-            opacity: 0;
-            transition: opacity 0.2s;
-        }
-        .ayah-card:hover .ayah-actions { opacity: 1; }
-        .ayah-actions button {
-            width: 2rem;
-            height: 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: 0.5rem;
-            color: var(--text-muted);
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .ayah-actions button:hover { background: var(--accent); border-color: var(--accent); color: white; }
-        .ayah-actions button.bookmarked { background: var(--gold); border-color: var(--gold); color: var(--bg-primary); }
-
-        /* Sidebar */
-        .sidebar { background: var(--bg-secondary); border-right: 1px solid var(--border); }
-        .surah-item {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.875rem;
-            border-radius: 0.75rem;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .surah-item:hover { background: var(--bg-card); }
-        .surah-item.active { background: var(--bg-card); border-right: 3px solid var(--gold); }
-        .surah-num {
-            width: 2.25rem;
-            height: 2.25rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--bg-card);
-            border-radius: 50%;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--text-muted);
-        }
-
-        /* Toast */
-        .toast {
-            position: fixed;
-            bottom: 6rem;
-            left: 50%;
-            transform: translateX(-50%) translateY(100px);
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            padding: 0.75rem 1.25rem;
-            border-radius: 0.75rem;
-            font-size: 0.9rem;
-            opacity: 0;
-            transition: all 0.3s;
-            z-index: 100;
-        }
-        .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
-
-        /* Scrollbar */
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-track { background: var(--bg-secondary); }
-        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
-
-        /* Loading */
-        .loader {
-            width: 2.5rem;
-            height: 2.5rem;
-            border: 3px solid var(--border);
-            border-top-color: var(--accent);
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-        @keyframes spin { to { transform: rotate(360deg); } }
-
-        @media (max-width: 640px) {
-            :root { --font-size-ar: 24px; }
-            .bismillah { font-size: 1.5rem; }
-            .bismillah::before, .bismillah::after { display: none; }
-            .surah-header { padding: 1.5rem 0.5rem; }
-            .surah-name-ar { font-size: 1.75rem; }
-            .surah-name-bn { font-size: 1.25rem; }
-        }
-
-        /* PWA */
-        @media (display-mode: standalone) {
-            header { padding-top: env(safe-area-inset-top); }
-            main { padding-bottom: env(safe-area-inset-bottom); }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-dark-bg text-dark-text">
+<body class="font-bangla bg-dark-bg text-dark-text overflow-hidden">
     <!-- Loading Screen -->
     <div id="loader" class="fixed inset-0 bg-dark-bg flex flex-col items-center justify-center z-50">
         <div class="text-center">
-            <div class="w-24 h-24 rounded-full bg-dark-card border-2 border-dark-gold/30 flex items-center justify-center mb-6 mx-auto">
+            <div class="w-24 h-24 rounded-full bg-dark-card border-2 border-dark-gold/30 flex items-center justify-center mb-6 mx-auto animate-pulse">
                 <svg class="w-14 h-14 text-dark-gold" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                 </svg>
             </div>
             <h2 class="text-2xl font-bold text-dark-gold mb-2">কুরআন বাংলা</h2>
             <p class="text-dark-muted">লোড হচ্ছে...</p>
-            <div class="loader mt-4 mx-auto"></div>
         </div>
     </div>
 
-    <!-- Home Page -->
+    <!-- Home Page - Font Selection -->
     <div id="home-page" class="hidden min-h-screen flex flex-col relative overflow-hidden">
         <div class="absolute inset-0 pointer-events-none">
-            <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-dark-highlight/5 to-transparent"></div>
-            <div class="absolute -top-20 -left-20 w-64 h-64 bg-dark-accent/10 rounded-full blur-3xl"></div>
-            <div class="absolute -bottom-20 -right-20 w-72 h-72 bg-dark-gold/10 rounded-full blur-3xl"></div>
+            <div class="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-dark-highlight/10 to-transparent"></div>
+            <div class="absolute -top-32 -left-32 w-96 h-96 bg-dark-accent/10 rounded-full blur-3xl"></div>
+            <div class="absolute -bottom-32 -right-32 w-96 h-96 bg-dark-gold/10 rounded-full blur-3xl"></div>
         </div>
 
         <div class="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 py-12">
             <!-- Logo -->
             <div class="mb-10">
-                <div class="w-28 h-28 rounded-full bg-dark-card border-2 border-dark-gold/30 flex items-center justify-center shadow-2xl">
-                    <svg class="w-16 h-16 text-dark-gold" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                    </svg>
+                <div class="w-32 h-32 rounded-full bg-dark-card border-2 border-dark-gold/40 flex items-center justify-center shadow-2xl">
+                    <span class="text-5xl font-amiri text-dark-gold">ق</span>
                 </div>
             </div>
 
             <!-- Title -->
             <div class="text-center mb-12">
-                <h1 class="text-4xl md:text-5xl font-bold text-dark-gold mb-3 tracking-wide">কুরআন বাংলা</h1>
-                <p class="text-dark-muted text-lg">তাইসিরুল কুরআন অনুবাদ</p>
-                <p class="text-dark-muted/60 text-sm mt-2">১১৪টি সূরা ও ৬২৩৬টি আয়াত</p>
+                <h1 class="text-5xl md:text-6xl font-bold text-dark-gold mb-4 tracking-wide">কুরআন</h1>
+                <p class="text-2xl text-dark-text mb-2">বাংলা</p>
+                <p class="text-dark-muted text-lg">তাফসিরসহ পূর্ণাঙ্গ কুরআন পাঠ</p>
             </div>
 
-            <!-- Font Selection -->
-            <div class="w-full max-w-sm space-y-4">
-                <button id="btn-kolkatta" class="w-full p-6 rounded-2xl border-2 border-dark-border bg-dark-card hover:border-dark-accent hover:bg-dark-highlight/30 transition-all duration-300 group cursor-pointer text-right">
-                    <div class="flex items-center gap-4">
+            <!-- Font Selection Cards -->
+            <div class="w-full max-w-md space-y-5">
+                <button id="btn-kolkatta" class="w-full p-6 rounded-2xl border-2 border-dark-border bg-dark-card hover:border-dark-gold hover:bg-dark-highlight/20 transition-all duration-300 group cursor-pointer text-right">
+                    <div class="flex items-center gap-5">
                         <div class="flex-1">
-                            <h2 class="text-xl font-bold text-dark-text group-hover:text-dark-accent mb-1">কলিকাতা ছাপা</h2>
-                            <p class="text-dark-muted text-sm">Al Qalam Kolkatta</p>
-                            <p class="text-dark-muted/60 text-xs mt-1">ঐতিহ্যবাহী ভারতীয় শৈলী</p>
+                            <h2 class="text-2xl font-bold text-dark-text group-hover:text-dark-gold mb-2">কলিকাতা ছাপা</h2>
+                            <p class="text-dark-muted text-sm">আল কালাম কলকাতা কুরআনিক</p>
+                            <p class="text-dark-muted/60 text-xs mt-2">ঐতিহ্যবাহী ভারতীয় শৈলী</p>
                         </div>
-                        <div class="text-4xl font-arabic text-dark-gold/60 group-hover:text-dark-gold">بِسْمِ</div>
+                        <div class="text-5xl font-amiri text-dark-gold/50 group-hover:text-dark-gold transition-colors">بِسْمِ</div>
                     </div>
                 </button>
 
-                <button id="btn-hafizi" class="w-full p-6 rounded-2xl border-2 border-dark-border bg-dark-card hover:border-dark-accent hover:bg-dark-highlight/30 transition-all duration-300 group cursor-pointer text-right">
-                    <div class="flex items-center gap-4">
+                <button id="btn-hafizi" class="w-full p-6 rounded-2xl border-2 border-dark-border bg-dark-card hover:border-dark-gold hover:bg-dark-highlight/20 transition-all duration-300 group cursor-pointer text-right">
+                    <div class="flex items-center gap-5">
                         <div class="flex-1">
-                            <h2 class="text-xl font-bold text-dark-text group-hover:text-dark-accent mb-1">হাফিজি ছাপা</h2>
-                            <p class="text-dark-muted text-sm">Al Qalam Quran Majeed</p>
-                            <p class="text-dark-muted/60 text-xs mt-1">আধুনিক মাদানী শৈলী</p>
+                            <h2 class="text-2xl font-bold text-dark-text group-hover:text-dark-gold mb-2">হাফিজি ছাপা</h2>
+                            <p class="text-dark-muted text-sm">আল কালাম কুরআন মাজিদ</p>
+                            <p class="text-dark-muted/60 text-xs mt-2">আধুনিক মাদানী শৈলী</p>
                         </div>
-                        <div class="text-4xl font-arabicHafizi text-dark-gold/60 group-hover:text-dark-gold">بِسْمِ</div>
+                        <div class="text-5xl font-schec text-dark-gold/50 group-hover:text-dark-gold transition-colors">بِسْمِ</div>
                     </div>
                 </button>
             </div>
 
-            <div class="mt-14 text-center">
-                <p class="text-dark-muted/50 text-sm">আপনার পছন্দের আরবি ফন্ট নির্বাচন করুন</p>
+            <div class="mt-16 text-center">
+                <p class="text-dark-muted/50">আপনার পছন্দের আরবি ফন্ট নির্বাচন করুন</p>
             </div>
         </div>
     </div>
 
-    <!-- Reader Page -->
-    <div id="reader-page" class="hidden min-h-screen flex flex-col">
-        <!-- Header -->
-        <header class="fixed top-0 left-0 right-0 z-50 bg-dark-bg/95 backdrop-blur-xl border-b border-dark-border">
-            <div class="flex items-center justify-between px-3 md:px-4 h-16">
-                <!-- Left -->
-                <div class="flex items-center gap-2 md:gap-3">
+    <!-- Main Reader App -->
+    <div id="reader-app" class="hidden h-screen flex flex-col">
+        <!-- Top Navigation Bar -->
+        <header class="flex-shrink-0 bg-dark-bg/95 backdrop-blur-xl border-b border-dark-border">
+            <div class="flex items-center justify-between px-4 h-16">
+                <!-- Left: Menu + Search -->
+                <div class="flex items-center gap-3">
                     <button id="btn-menu" class="p-2.5 rounded-xl hover:bg-dark-card transition-colors">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
                         </svg>
                     </button>
-                    <div class="min-w-0">
-                        <h1 id="surah-title" class="font-bangla font-bold text-base md:text-lg truncate max-w-[120px] md:max-w-none">আল-ফাতিহা</h1>
-                        <p id="ayah-info" class="text-xs text-dark-muted">আয়াত ১ / ৭</p>
+                    <button id="btn-search" class="p-2.5 rounded-xl hover:bg-dark-card transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                        </svg>
+                    </button>
+                    <div class="hidden md:flex items-center gap-2 px-3 py-1.5 bg-dark-card rounded-lg border border-dark-border">
+                        <svg class="w-4 h-4 text-dark-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/>
+                        </svg>
+                        <span class="text-sm text-dark-muted">বাংলা অনুবাদ</span>
                     </div>
                 </div>
 
-                <!-- Right Controls -->
-                <div class="flex items-center gap-1 md:gap-2">
-                    <button id="btn-font-size" class="p-2.5 rounded-xl hover:bg-dark-card transition-colors hidden md:flex" title="ফন্ট সাইজ">
+                <!-- Center: Current Surah -->
+                <div class="hidden md:flex flex-col items-center">
+                    <h1 id="surah-title" class="font-bangla font-bold text-lg text-dark-text">আল-ফাতিহা</h1>
+                    <p id="ayah-info" class="text-xs text-dark-muted">১ / ৭ আয়াত</p>
+                </div>
+
+                <!-- Right: Controls -->
+                <div class="flex items-center gap-2">
+                    <button id="btn-settings" class="p-2.5 rounded-xl hover:bg-dark-card transition-colors" title="সেটিংস">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                         </svg>
                     </button>
-                    <button id="btn-lang" class="p-2.5 rounded-xl hover:bg-dark-card transition-colors">
-                        <span class="text-xs font-bold">বাং</span>
-                    </button>
-                    <button id="btn-theme" class="p-2.5 rounded-xl hover:bg-dark-card transition-colors">
+                    <button id="btn-theme" class="p-2.5 rounded-xl hover:bg-dark-card transition-colors" title="থিম">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
                         </svg>
                     </button>
-                    <button id="btn-trans" class="p-2.5 rounded-xl hover:bg-dark-card transition-colors" title="অনুবাদ">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/>
-                        </svg>
-                    </button>
-                    <button id="btn-bookmarks" class="p-2.5 rounded-xl hover:bg-dark-card transition-colors">
+                    <button id="btn-bookmarks" class="p-2.5 rounded-xl hover:bg-dark-card transition-colors" title="বুকমার্ক">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/>
                         </svg>
@@ -421,78 +183,130 @@
             </div>
         </header>
 
-        <!-- Font Size Modal -->
-        <div id="font-modal" class="fixed inset-0 bg-black/70 z-50 hidden items-center justify-center p-4 backdrop-blur-sm">
-            <div class="bg-dark-surface rounded-2xl p-6 w-full max-w-xs animate-slide-up">
-                <h3 class="font-bangla font-bold text-lg text-center mb-6">ফন্ট সাইজ</h3>
-                <div class="flex items-center justify-between gap-4">
-                    <button id="font-minus" class="w-12 h-12 rounded-xl bg-dark-card border border-dark-border flex items-center justify-center hover:border-dark-accent">-</button>
-                    <div class="text-center">
-                        <div id="font-display" class="text-3xl font-bold text-dark-gold">৩২</div>
-                        <div class="text-xs text-dark-muted">px</div>
-                    </div>
-                    <button id="font-plus" class="w-12 h-12 rounded-xl bg-dark-card border border-dark-border flex items-center justify-center hover:border-dark-accent">+</button>
-                </div>
-                <div class="mt-6 flex gap-3">
-                    <button id="font-reset" class="flex-1 py-3 rounded-xl bg-dark-card border border-dark-border hover:border-dark-muted">রিসেট</button>
-                    <button id="font-close" class="flex-1 py-3 rounded-xl bg-dark-accent text-white font-semibold">বন্ধ</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Main Content -->
-        <div class="flex flex-1 pt-16">
+        <!-- Main Layout: Sidebar + Content -->
+        <div class="flex-1 flex overflow-hidden">
             <!-- Sidebar -->
-            <aside id="sidebar" class="fixed left-0 top-16 bottom-0 w-72 md:w-80 sidebar border-r transform -translate-x-full transition-transform z-40 overflow-hidden">
-                <div class="flex flex-col h-full">
-                    <div class="p-4 border-b border-dark-border/30">
-                        <div class="relative">
-                            <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-dark-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-                            </svg>
-                            <input type="text" id="search-surah" placeholder="সূরা খুঁজুন..." class="w-full pl-10 pr-4 py-3 rounded-xl bg-dark-card border border-dark-border text-dark-text placeholder-dark-muted focus:border-dark-accent outline-none font-bangla">
-                        </div>
+            <aside id="sidebar" class="w-80 flex-shrink-0 bg-dark-surface border-r border-dark-border transform -translate-x-full md:translate-x-0 transition-transform duration-300 overflow-hidden flex flex-col">
+                <div class="p-4 border-b border-dark-border/30">
+                    <div class="relative">
+                        <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-dark-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                        </svg>
+                        <input type="text" id="search-surah" placeholder="সূরা খুঁজুন..." class="w-full pl-10 pr-4 py-3 rounded-xl bg-dark-card border border-dark-border text-dark-text placeholder-dark-muted focus:border-dark-gold focus:outline-none font-bangla">
                     </div>
-                    <div id="surah-list" class="flex-1 overflow-y-auto p-3 space-y-2"></div>
                 </div>
+                <div id="surah-list" class="flex-1 overflow-y-auto p-3 space-y-2"></div>
             </aside>
 
-            <div id="overlay" class="fixed inset-0 bg-black/70 z-30 hidden" onclick="toggleSidebar()"></div>
+            <!-- Overlay -->
+            <div id="sidebar-overlay" class="fixed inset-0 bg-black/70 z-20 md:hidden hidden" onclick="toggleSidebar()"></div>
 
-            <!-- Content -->
-            <main class="flex-1 w-full max-w-3xl mx-auto">
-                <div id="quran-content" class="p-4 md:p-6 pb-32">
-                    <div class="flex flex-col items-center justify-center py-20">
-                        <div class="loader mb-4"></div>
-                        <p class="text-dark-muted">সূরা লোড হচ্ছে...</p>
-                    </div>
+            <!-- Main Content -->
+            <main class="flex-1 overflow-y-auto" id="main-content">
+                <div id="quran-content" class="max-w-3xl mx-auto p-4 md:p-6 pb-32">
+                    <!-- Content loaded dynamically -->
                 </div>
             </main>
         </div>
 
-        <!-- Mobile Surah Selector -->
-        <div id="mobile-selector" class="fixed inset-x-0 bottom-0 bg-dark-surface border-t border-dark-border transform translate-y-full transition-transform z-50 max-h-[70vh] rounded-t-3xl">
-            <div class="flex flex-col max-h-full">
-                <div class="flex justify-center py-3">
-                    <div class="w-12 h-1.5 rounded-full bg-dark-border"></div>
+        <!-- Audio Player -->
+        <div id="audio-player" class="fixed bottom-0 left-0 right-0 bg-dark-surface border-t border-dark-border z-30 hidden">
+            <div class="flex items-center justify-between px-4 py-3">
+                <div class="flex items-center gap-3">
+                    <button id="audio-play" class="w-12 h-12 rounded-full bg-dark-gold flex items-center justify-center hover:opacity-90 transition">
+                        <svg id="play-icon" class="w-6 h-6 text-dark-bg" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M8 5v14l11-7z"/>
+                        </svg>
+                        <svg id="pause-icon" class="w-6 h-6 text-dark-bg hidden" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
+                        </svg>
+                    </button>
+                    <div>
+                        <p id="audio-surah" class="font-semibold text-sm">আল-ফাতিহা</p>
+                        <p id="audio-ayah" class="text-xs text-dark-muted">আয়াত ১</p>
+                    </div>
                 </div>
-                <div class="flex items-center justify-between px-4 pb-3 border-b border-dark-border/30">
-                    <h3 class="font-bangla font-bold text-lg">সূরা নির্বাচন</h3>
-                    <button id="close-selector" class="p-2 rounded-lg hover:bg-dark-card">
+                <div class="flex items-center gap-2">
+                    <button id="audio-prev" class="p-2 rounded-lg hover:bg-dark-card">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                        </svg>
+                    </button>
+                    <button id="audio-next" class="p-2 rounded-lg hover:bg-dark-card">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <!-- Progress -->
+            <div class="px-4 pb-3">
+                <div class="h-1 bg-dark-border rounded-full">
+                    <div id="audio-progress" class="h-full bg-dark-gold rounded-full" style="width: 0%"></div>
+                </div>
+                <div class="flex justify-between text-xs text-dark-muted mt-1">
+                    <span id="audio-current">0:00</span>
+                    <span id="audio-duration">0:00</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Modal -->
+        <div id="settings-modal" class="fixed inset-0 bg-black/70 z-50 hidden items-center justify-center p-4 backdrop-blur-sm">
+            <div class="bg-dark-surface rounded-2xl w-full max-w-md max-h-[80vh] overflow-hidden animate-slide-up">
+                <div class="flex items-center justify-between px-6 py-4 border-b border-dark-border/30">
+                    <h3 class="font-bold text-lg">সেটিংস</h3>
+                    <button id="close-settings" class="p-2 rounded-lg hover:bg-dark-card">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                         </svg>
                     </button>
                 </div>
-                <div id="mobile-list" class="flex-1 overflow-y-auto p-3 space-y-2"></div>
+                <div class="p-6 space-y-6 overflow-y-auto max-h-[60vh]">
+                    <!-- Arabic Font Size -->
+                    <div>
+                        <label class="block text-sm font-semibold mb-3">আরবি ফন্ট সাইজ</label>
+                        <div class="flex items-center gap-4">
+                            <button onclick="updateFontSize('arabic', -2)" class="w-10 h-10 rounded-lg bg-dark-card border border-dark-border flex items-center justify-center hover:border-dark-gold">-</button>
+                            <span id="arabic-size" class="text-xl font-bold text-dark-gold w-12 text-center">32</span>
+                            <button onclick="updateFontSize('arabic', 2)" class="w-10 h-10 rounded-lg bg-dark-card border border-dark-border flex items-center justify-center hover:border-dark-gold">+</button>
+                        </div>
+                    </div>
+                    <!-- Bengali Font Size -->
+                    <div>
+                        <label class="block text-sm font-semibold mb-3">বাংলা ফন্ট সাইজ</label>
+                        <div class="flex items-center gap-4">
+                            <button onclick="updateFontSize('bangla', -1)" class="w-10 h-10 rounded-lg bg-dark-card border border-dark-border flex items-center justify-center hover:border-dark-gold">-</button>
+                            <span id="bangla-size" class="text-xl font-bold text-dark-gold w-12 text-center">18</span>
+                            <button onclick="updateFontSize('bangla', 1)" class="w-10 h-10 rounded-lg bg-dark-card border border-dark-border flex items-center justify-center hover:border-dark-gold">+</button>
+                        </div>
+                    </div>
+                    <!-- Translation Toggle -->
+                    <div class="flex items-center justify-between">
+                        <label class="text-sm font-semibold">অনুবাদ দেখান</label>
+                        <button id="toggle-translation" class="w-12 h-6 rounded-full bg-dark-card border border-dark-border relative transition-colors">
+                            <div class="w-5 h-5 rounded-full bg-dark-gold absolute top-0.5 left-0.5 transition-transform"></div>
+                        </button>
+                    </div>
+                    <!-- Reciter Selection -->
+                    <div>
+                        <label class="block text-sm font-semibold mb-3">কারী</label>
+                        <select id="reciter-select" class="w-full p-3 rounded-xl bg-dark-card border border-dark-border text-dark-text focus:border-dark-gold outline-none">
+                            <option value="ar.alafasy">মিশারি আল আফাসি</option>
+                            <option value="ar.husary">হোসারি মুখতার</option>
+                            <option value="ar.abdulbasit">আব্দুল বাসিত</option>
+                            <option value="ar.shaatree">শাত্রী</option>
+                        </select>
+                    </div>
+                </div>
             </div>
         </div>
 
         <!-- Bookmarks Modal -->
         <div id="bookmarks-modal" class="fixed inset-0 bg-black/70 z-50 hidden items-center justify-center p-4 backdrop-blur-sm">
             <div class="bg-dark-surface rounded-2xl w-full max-w-sm max-h-[80vh] overflow-hidden animate-slide-up">
-                <div class="flex items-center justify-between px-4 py-4 border-b border-dark-border/30">
-                    <h3 class="font-bangla font-bold text-lg">বুকমার্ক</h3>
+                <div class="flex items-center justify-between px-6 py-4 border-b border-dark-border/30">
+                    <h3 class="font-bold text-lg">বুকমার্ক</h3>
                     <button id="close-bookmarks" class="p-2 rounded-lg hover:bg-dark-card">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
@@ -503,13 +317,27 @@
             </div>
         </div>
 
+        <!-- Search Modal -->
+        <div id="search-modal" class="fixed inset-0 bg-black/70 z-50 hidden items-start justify-center pt-20 p-4 backdrop-blur-sm">
+            <div class="bg-dark-surface rounded-2xl w-full max-w-2xl animate-slide-up">
+                <div class="p-4 border-b border-dark-border/30">
+                    <div class="relative">
+                        <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-dark-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                        </svg>
+                        <input type="text" id="global-search" placeholder="সূরা বা আয়াত খুঁজুন..." class="w-full pl-10 pr-4 py-4 rounded-xl bg-dark-card border border-dark-border text-dark-text placeholder-dark-muted focus:border-dark-gold focus:outline-none text-lg font-bangla">
+                    </div>
+                </div>
+                <div id="search-results" class="p-4 max-h-96 overflow-y-auto"></div>
+            </div>
+        </div>
+
         <!-- Toast -->
-        <div id="toast" class="toast">
-            <p id="toast-msg"></p>
+        <div id="toast" class="fixed bottom-24 left-1/2 -translate-x-1/2 bg-dark-card border border-dark-border px-5 py-3 rounded-xl shadow-2xl transform translate-y-20 opacity-0 transition-all duration-300 z-50">
+            <p id="toast-msg" class="font-bangla text-sm"></p>
         </div>
     </div>
 
-    <script src="quran-data.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

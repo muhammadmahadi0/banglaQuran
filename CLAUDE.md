@@ -2,89 +2,57 @@
 
 ## Project Overview
 - **Name**: কুরআন বাংলা (Quran Bangla)
-- **Type**: Mobile-first Quran web application
-- **Inspiration**: banglaquran.netlify.app but more polished
-- **Goal**: Premium, elegant, spiritual reading experience
+- **Type**: Modern Quran Web Application
+- **API**: https://api.quran.com/api/v4
+- **Goal**: Match Quran.com quality with Bangla translation
 
 ## Tech Stack
-- HTML5 + Tailwind CSS (CDN) + Vanilla JavaScript
-- PWA-ready with service worker
-- Local storage for persistence
+- HTML5 + Tailwind CSS (CDN)
+- Vanilla JavaScript (ES6+)
+- API-based data fetching
 
-## Key Features
+## Features
+1. Font Selection: কলিকাতা ছাপা / হাফিজি ছাপা
+2. API Integration: Real Quran data from api.quran.com
+3. Bengali Translation (Translation ID: 161)
+4. Audio Player with multiple reciters
+5. Search functionality
+6. Bookmarks
+7. Settings: Font size, theme, reciter
+8. Dark/Light theme
+9. Responsive design
+10. Progress indicator
 
-### Font Selection (Homepage)
-- Two cards: কলিকাতা ছাপা (Kolkatta) / হাফিজি ছাপা (Hafizi)
-- Saves to localStorage `quran_font_style`
+## API Endpoints Used
+- `/chapters` - List all 114 surahs
+- `/chapters/{id}/verses` - Get verses with Arabic
+- `?translations={id}` - Get Bengali translation
 
-### Main Reader
-- Fixed top bar with Surah name + current ayah
-- Surah list (sidebar on desktop, bottom sheet on mobile)
-- Searchable surah list
-- Large Arabic text (use Amiri for Kolkatta, Scheherazade for Hafizi)
-- Bangla translation (taisirul quran) below each ayah
-- Translation toggle button
-- Language toggle (বাংলা ↔ English)
-- Dark/Light theme toggle
-- Font size adjuster
-- Audio player (per ayah)
-- Bookmark feature
-- Copy ayah feature
-- Last read position auto-save
-- Juz progress indicator
-
-### Data Source
-- Translation: তাইসিরুল কুরআন (Taisirul Quran) by Dr. মুহিউদ্দীন খান
-- Full JSON structure with 114 surahs
-
-## Design System
-
-### Colors (Dark Mode - Default)
-- Background: `#0a0f0d` (deep green-black)
-- Surface: `#111916`
-- Card: `#1a2420`
-- Accent: `#2dd4bf` (teal)
-- Gold: `#fbbf24`
-- Text: `#e8f5f1`
-- Muted: `#6b8f85`
-
-### Colors (Light Mode)
-- Background: `#f8faf9`
-- Surface: `#ffffff`
-- Accent: `#0d9488`
-- Gold: `#b45309`
-
-### Typography
-- Arabic Kolkatta: Amiri (32px, line-height 2.2)
-- Arabic Hafizi: Scheherazade New (32px, line-height 2.0)
-- Bangla: Hind Siliguri (18px, line-height 1.8)
-- UI: Noto Sans Bengali
-
-## File Structure
-```
-banglaQuran/
-├── index.html
-├── style.css
-├── script.js
-├── manifest.json
-├── sw.js
-├── data/
-│   └── quran.json
-└── CLAUDE.md
-```
+## Key Files
+- index.html - Main HTML structure
+- style.css - Custom styles
+- script.js - Application logic
 
 ## localStorage Keys
-- `quran_font_style`: "kolkatta" | "hafizi"
-- `quran_theme`: "dark" | "light"
-- `quran_translation`: boolean
-- `quran_language`: "bn" | "en"
-- `quran_bookmarks`: JSON array
-- `quran_last_read`: {surah, ayah}
-- `quran_font_size`: number
+- quran_font_style: "kolkatta" | "hafizi"
+- quran_theme: "dark" | "light"
+- quran_translation: boolean
+- quran_arabic_size: number
+- quran_bangla_size: number
+- quran_reciter: string
+- quran_bookmarks: JSON array
+- quran_current_surah: number
+- quran_current_ayah: number
 
-## Important Notes
-- Always use Bengali numbers (০১২৩...) for display
-- Use Arabic numbers (٠١٢٣...) inside ayah circles
-- Bismillah should appear at start of all surahs except Surah 9
-- Audio files should be from a reliable source (e.g., Mishary Rashid)
-- Ensure RTL for Arabic text
+## Available Reciters
+- ar.alafasy: মিশারি আল আফাসি
+- ar.husary: হোসারি মুখতার
+- ar.abdulbasit: আব্দুল বাসিত
+- ar.shaatree: শাত্রী
+
+## Notes
+- Audio files from https://verses.quran.com
+- Translation ID 161 = Muhammad Farooq (Bengali)
+- Uses Amiri font for Kolkatta style
+- Uses Scheherazade New for Hafizi style
+- Uses Hind Siliguri for Bangla text
