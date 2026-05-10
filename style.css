@@ -1,0 +1,608 @@
+/* Quran Bangla - Custom Styles */
+
+/* Base Styles */
+:root {
+    --bg-primary: #0a0f0d;
+    --bg-secondary: #111916;
+    --bg-surface: #1a2420;
+    --border-color: #2a3d35;
+    --accent: #2dd4bf;
+    --gold: #fbbf24;
+    --text-primary: #e8f5f1;
+    --text-muted: #6b8f85;
+    --arabic-kolkatta: 'Amiri', serif;
+    --arabic-hafizi: 'Scheherazade New', serif;
+    --bangla-font: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
+}
+
+.light-mode {
+    --bg-primary: #f8faf9;
+    --bg-secondary: #ffffff;
+    --bg-surface: #f1f5f3;
+    --border-color: #d1dcd8;
+    --accent: #0d9488;
+    --gold: #b45309;
+    --text-primary: #1a2e29;
+    --text-muted: #5c7a70;
+}
+
+/* Global */
+body {
+    font-family: 'Noto Sans Bengali', sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Light Mode Body */
+.light-mode body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+/* Header */
+.light-mode #theme-toggle svg,
+.light-mode #menu-toggle svg,
+.light-mode #lang-toggle,
+.light-mode #translation-toggle svg,
+.light-mode #bookmarks-btn svg {
+    color: var(--text-primary);
+}
+
+.light-mode #theme-toggle,
+.light-mode #menu-toggle,
+.light-mode #lang-toggle,
+.light-mode #translation-toggle,
+.light-mode #bookmarks-btn {
+    background-color: var(--bg-surface);
+}
+
+.light-mode #theme-toggle:hover,
+.light-mode #menu-toggle:hover,
+.light-mode #lang-toggle:hover,
+.light-mode #translation-toggle:hover,
+.light-mode #bookmarks-btn:hover {
+    background-color: var(--border-color);
+}
+
+/* Surah Sidebar */
+.light-mode #surah-sidebar {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-color);
+}
+
+.light-mode #surah-search {
+    background-color: var(--bg-surface);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+.light-mode #surah-search::placeholder {
+    color: var(--text-muted);
+}
+
+.light-mode .surah-item {
+    background-color: var(--bg-surface);
+    border-color: var(--border-color);
+}
+
+.light-mode .surah-item:hover,
+.light-mode .surah-item.active {
+    background-color: var(--bg-primary);
+    border-color: var(--accent);
+}
+
+.light-mode .surah-item.active {
+    border-right-color: var(--gold);
+}
+
+/* Quran Content */
+.light-mode #quran-content {
+    color: var(--text-primary);
+}
+
+.light-mode .ayah-container {
+    background-color: var(--bg-surface);
+    border-color: var(--border-color);
+}
+
+.light-mode .ayah-container:hover {
+    background-color: var(--bg-secondary);
+}
+
+.light-mode .verse-number {
+    color: var(--text-muted);
+}
+
+.light-mode .bismillah {
+    color: var(--gold);
+}
+
+/* Mobile Surah Selector */
+.light-mode #mobile-surah-selector {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-color);
+}
+
+.light-mode .mobile-surah-item {
+    background-color: var(--bg-surface);
+}
+
+.light-mode .mobile-surah-item:hover {
+    background-color: var(--bg-primary);
+}
+
+/* Bookmarks Modal */
+.light-mode #bookmarks-modal > div {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-color);
+}
+
+.light-mode #bookmarks-modal h3 {
+    color: var(--text-primary);
+    border-color: var(--border-color);
+}
+
+.light-mode .bookmark-item {
+    background-color: var(--bg-surface);
+    border-color: var(--border-color);
+}
+
+/* Toast */
+.light-mode #toast {
+    background-color: var(--bg-surface);
+    border-color: var(--border-color);
+}
+
+/* Arabic Text - Kolkatta Style */
+.arabic-kolkatta {
+    font-family: var(--arabic-kolkatta);
+    font-size: 1.75rem;
+    line-height: 2.2;
+    text-align: center;
+    color: var(--text-primary);
+    direction: rtl;
+}
+
+/* Arabic Text - Hafizi Style */
+.arabic-hafizi {
+    font-family: var(--arabic-hafizi);
+    font-size: 1.75rem;
+    line-height: 2;
+    text-align: center;
+    color: var(--text-primary);
+    direction: rtl;
+}
+
+/* Bangla Translation */
+.bangla-translation {
+    font-family: var(--bangla-font);
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+    text-align: right;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px dashed var(--border-color);
+}
+
+/* Verse Number */
+.verse-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    background-color: var(--bg-surface);
+    border-radius: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Ayah Container */
+.ayah-container {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.ayah-container:hover {
+    border-color: var(--accent);
+    box-shadow: 0 4px 20px rgba(45, 212, 191, 0.1);
+}
+
+/* Bismillah */
+.bismillah {
+    font-family: var(--arabic-kolkatta);
+    font-size: 1.5rem;
+    text-align: center;
+    color: var(--gold);
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Surah Header */
+.surah-header {
+    text-align: center;
+    padding: 2rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.surah-header .surah-name-arabic {
+    font-family: var(--arabic-kolkatta);
+    font-size: 2rem;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+}
+
+.surah-header .surah-name-bangla {
+    font-family: var(--bangla-font);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.surah-header .surah-meta {
+    font-family: var(--bangla-font);
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin-top: 0.5rem;
+}
+
+/* Surah Sidebar Items */
+#surah-list {
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+}
+
+.surah-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: var(--bangla-font);
+}
+
+.surah-item:hover {
+    background-color: var(--bg-primary);
+    border-color: var(--accent);
+}
+
+.surah-item.active {
+    background-color: var(--bg-primary);
+    border-color: var(--accent);
+    border-right: 3px solid var(--gold);
+}
+
+.surah-item .surah-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    background-color: var(--bg-card);
+    border-radius: 50%;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    flex-shrink: 0;
+}
+
+.surah-item .surah-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.surah-item .surah-name {
+    font-weight: 600;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.surah-item .surah-details {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.surah-item .verse-count {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    flex-shrink: 0;
+}
+
+/* Mobile Surah Selector */
+.mobile-surah-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background-color: var(--bg-surface);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-family: var(--bangla-font);
+}
+
+.mobile-surah-item:hover {
+    background-color: var(--bg-primary);
+}
+
+/* Bookmarks */
+.bookmark-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+    cursor: pointer;
+    font-family: var(--bangla-font);
+}
+
+.bookmark-item .bookmark-info {
+    flex: 1;
+}
+
+.bookmark-item .bookmark-surah {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.bookmark-item .bookmark-ayah {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+.bookmark-item .remove-bookmark {
+    padding: 0.5rem;
+    color: var(--text-muted);
+    transition: color 0.2s;
+}
+
+.bookmark-item .remove-bookmark:hover {
+    color: #ef4444;
+}
+
+/* Action Buttons */
+.ayah-actions {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    display: flex;
+    gap: 0.25rem;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.ayah-container:hover .ayah-actions {
+    opacity: 1;
+}
+
+.ayah-actions button {
+    padding: 0.375rem;
+    background-color: var(--bg-primary);
+    border-radius: 0.375rem;
+    color: var(--text-muted);
+    transition: all 0.2s;
+}
+
+.ayah-actions button:hover {
+    background-color: var(--accent);
+    color: var(--bg-primary);
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
+}
+
+/* Animation Classes */
+.fade-in {
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.slide-in {
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+/* Toast Animation */
+.toast-show {
+    transform: translateY(0) !important;
+    opacity: 1 !important;
+}
+
+/* Surah Number in Arabic */
+.arabic-verse-num {
+    font-family: var(--arabic-kolkatta);
+    color: var(--text-muted);
+}
+
+/* Bengali Numbers */
+.bengali-num {
+    font-family: var(--bangla-font);
+}
+
+/* Loading State */
+.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.loading::after {
+    content: '';
+    width: 2rem;
+    height: 2rem;
+    border: 2px solid var(--border-color);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 640px) {
+    .arabic-kolkatta,
+    .arabic-hafizi {
+        font-size: 1.5rem;
+    }
+
+    .bangla-translation {
+        font-size: 0.9rem;
+    }
+
+    .ayah-container {
+        padding: 1rem;
+    }
+
+    .surah-header {
+        padding: 1.5rem;
+    }
+
+    .surah-header .surah-name-arabic {
+        font-size: 1.5rem;
+    }
+
+    .surah-header .surah-name-bangla {
+        font-size: 1.25rem;
+    }
+}
+
+/* Hide Translation Class */
+.translation-hidden .bangla-translation {
+    display: none;
+}
+
+/* Active State for Toggles */
+.toggle-active {
+    background-color: var(--accent) !important;
+    color: var(--bg-primary) !important;
+}
+
+/* Settings Panel (Future) */
+.settings-panel {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    max-width: 320px;
+    height: 100vh;
+    background-color: var(--bg-secondary);
+    z-index: 60;
+    transition: right 0.3s ease;
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.settings-panel.open {
+    right: 0;
+}
+
+/* Font Size Controls */
+.font-size-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.font-size-controls button {
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    color: var(--text-primary);
+    transition: all 0.2s;
+}
+
+.font-size-controls button:hover {
+    border-color: var(--accent);
+}
+
+.font-size-controls span {
+    font-family: var(--bangla-font);
+    color: var(--text-muted);
+    min-width: 2rem;
+    text-align: center;
+}
+
+/* PWA Support */
+@media (display-mode: standalone) {
+    header {
+        padding-top: env(safe-area-inset-top);
+    }
+
+    main {
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+}
+
+/* Print Styles */
+@media print {
+    header,
+    aside,
+    .ayah-actions,
+    #bookmarks-modal {
+        display: none !important;
+    }
+
+    .ayah-container {
+        break-inside: avoid;
+        border: none;
+        padding: 1rem 0;
+    }
+}
